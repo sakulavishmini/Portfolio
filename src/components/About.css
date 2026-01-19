@@ -1,0 +1,14 @@
+.about {
+  text-align: center;
+  padding: 100px 20px;
+  background-color: #282c34;
+  color: white;
+}
+.about h1 {
+  font-size: 3rem;
+}
+.about p {
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+

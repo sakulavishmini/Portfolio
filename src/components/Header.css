@@ -1,0 +1,119 @@
+.header {
+  width: 100%;
+}
+
+.nav{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 18px 10%;
+  background: transparent;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 1000;
+
+  background: rgba(255, 255, 255, 0.12);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.logo {
+  font-size: 26px;
+  font-weight: 700;
+  color: #0ef;
+  text-decoration: none;
+}
+
+.nav-links a {
+  font-size: 18px;
+  color: #111827;
+  text-decoration: none;
+  font-weight: 500;
+  margin-left: 30px;
+  transition: 0.3s;
+}
+
+.nav-links a:hover{
+  color: #0ef;
+}
+
+.hero {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  padding: 120px 10% 60px;
+}
+
+.hero-container{
+  display: flex;
+  align-items: center;
+  gap: 60px;
+}
+
+
+.profile-image {
+  flex: 0 0 200px;                
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+.profile-circle {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: #081b29;
+  border: 5px solid rgb(35, 148, 156);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.profile-circle img
+{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.cv-btn{
+  padding: 14px 32px;
+  border-radius: 30px;
+  background: #0ef;
+  color: #081b29;
+  font-weight: 600;
+  text-decoration: none;
+  transition: 0.3s;
+
+}
+
+.cv-btn:hover {
+   background: transparent;
+    color: #0ef;
+    border: 2px solid #0ef;
+}
+
+.cv-btn-outline {
+  background: transparent;
+    color: #0ef;
+    border: 2px solid #0ef;
+}
+
+@media (min-width: 768px)
+{
+  .hero{
+    flex-direction: row;
+    justify-content: center;
+    gap: 40px;
+    text-align: left;
+  }
+
+  .nav{
+    gap:35px;
+  }
+}
