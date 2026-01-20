@@ -32,6 +32,5 @@ This project is **ongoing**, and I continuously update it with new projects, fea
 
 ## Author
 - **Name:** Sakuja Jayarathne  
-- **GitHub:** [sakulavishmini]([https://github.com/sakulajayarathne](https://github.com/sakulavishmini
-))  
+- **GitHub:** [sakulavishmini]([https://github.com/sakulajayarathne](https://github.com/sakulavishmini))
 - **Portfolio (Live):** [https://sakulajayarathne.vercel.app/](https://sakulajayarathne.vercel.app/)
