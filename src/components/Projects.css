@@ -1,14 +1,65 @@
 .projects {
-  text-align: center;
   padding: 100px 20px;
-  background-color: #282c34;
-  color: white;
-}
-.projects h1 {
-  font-size: 3rem;
-}
-.projects p {
-  font-size: 1.2rem;
-  margin-top: 10px;
+  color: #e5e7eb;
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s ease;
 }
 
+.projects.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.projects-grid {
+  margin-top: 50px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+}
+
+/* Glass project card */
+.project-card {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(12px);
+  border-radius: 20px;
+  padding: 30px;
+  transition: transform 0.3s ease, background 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-10px);
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.project-card h3 {
+  margin-bottom: 10px;
+  color: #38bdf8;
+}
+
+.project-card p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #cbd5f5;
+}
+
+/* Links */
+.project-links {
+  margin-top: 20px;
+  display: flex;
+  gap: 20px;
+}
+
+.project-links a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #0ef;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.project-links a:hover {
+  color: #38bdf8;
+}

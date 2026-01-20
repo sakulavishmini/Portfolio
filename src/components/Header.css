@@ -1,6 +1,6 @@
 :root {
   --bg-color: #ffffff;
-  --text-color: #111827;
+  --text-color: #ffffff;
   --accent-color: #0ef;
 }
 
@@ -17,7 +17,7 @@ body {
   width: 100%;
   padding: 16px 32px;
   display: flex;
-  justify-content: space-between; 
+  justify-content: space-around; 
   align-items: center;
   z-index: 1000;
 
@@ -165,7 +165,7 @@ body {
 
    .nav-links {
     position: fixed;
-    top: 70px; /* ✅ below navbar */
+    top: 70px;
     right: -100%;
     height: calc(100vh - 70px);
     width: 60%;

@@ -1,0 +1,32 @@
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 0%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+}
+
+.footer p {
+  font-size: 0.9rem;
+  color: #9ca3af;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 20px;
+  font-size: 1.1rem;
+}
+
+.footer-icons a {
+  color: #0ef;
+  transition: 0.3s;
+}
+
+.footer-icons a:hover {
+  transform: scale(1.2);
+}

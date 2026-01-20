@@ -12,6 +12,10 @@
 
 }
 
+.about-container:hover {
+  box-shadow: 0 0 25px rgba(0, 238, 255, 0.3);
+}
+
 /* Title */
 .section-title {
   font-size: 2.8rem;
