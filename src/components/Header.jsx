@@ -3,11 +3,14 @@ import "./Header.css";
 import profilePic from "../assets/profile.png";
 import AOS from "aos";
 import "aos/dist/aos.css";
+import Typed from "typed.js";
+import { useRef } from "react";
 
 const Header = () => {
   const [activeLink, setActiveLink] = useState("home");
   const [menuOpen, setMenuOpen] = useState(false);
   const [shrink, setShrink] = useState(false); // for navbar shrink on scroll
+  const typedRef = useRef(null);
 
   // Highlight active section and shrink navbar on scroll
   useEffect(() => {
@@ -39,6 +42,23 @@ const Header = () => {
     AOS.init({ duration: 1000, once: true });
   }, []);
 
+  useEffect(() => {
+  const typed = new Typed(typedRef.current, {
+    strings: [
+      "Software Engineering Undergraduate",
+      "Frontend Developer",
+      "Backend Developer"
+    ],
+    typeSpeed: 60,
+    backSpeed: 40,
+    backDelay: 1500,
+    loop: true,
+  });
+
+  return () => typed.destroy();
+}, []);
+
+
   // Hamburger toggle
   const handleMenuToggle = () => setMenuOpen(!menuOpen);
 
@@ -48,12 +68,11 @@ const Header = () => {
     setMenuOpen(false);
   };
 
+
   return (
     <header className="header">
       <nav className={`nav ${shrink ? "nav-shrink" : ""}`}>
-  <a href="#home" className={`logo ${activeLink === "home" ? "active" : ""}`}>
-    Sakula
-  </a>
+  <a href="#home" className={`logo ${activeLink === "home" ? "active" : ""}`}>Sakula Jayarathne</a>
 
   <div className="nav-right">
     <div className={`nav-links ${menuOpen ? "open" : ""}`}>
@@ -80,7 +99,10 @@ const Header = () => {
           <div className="intro">
             <p className="greeting">Hello! I'm</p>
             <h1 className="name">Sakula Jayarathne</h1>
-            <p className="title">Software Engineering Undergraduate</p>
+            <p className="title">
+              <span ref={typedRef} className="typed-text"></span>
+            </p>
+
             <a
               href="/cv.pdf"
               className="cv-btn"

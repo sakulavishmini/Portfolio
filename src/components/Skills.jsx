@@ -20,6 +20,17 @@ const Skills = () => {
         { name: "VS Code", icon: <FaGithub />, level: 80 },
       ],
     },
+
+    {
+      title: "Programming Languages",
+      skills: [
+        { name: "Java", icon: <FaGithub />, level: 50 },
+        { name: "Python", icon: <FaGithub />, level: 50 },
+        { name: "C", icon: <FaGithub />, level: 60 },
+        { name: "C#", icon: <FaGithub />, level: 60 },
+        { name: "PHP", icon: <FaGithub />, level: 50 },
+      ],
+    },
   ];
 
   return (

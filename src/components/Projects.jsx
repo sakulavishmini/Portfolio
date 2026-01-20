@@ -11,22 +11,37 @@ const Projects = () => {
       title: "Hospital Database System",
       description:
         "A relational database system designed using ER diagrams and SQL queries for hospital management.",
-      github: "https://github.com/yourusername/hospital-database",
+      github: "https://github.com/sakulavishmini/Hospital-Database",
       live: "",
     },
     {
       title: "Music & Entertainment SRS",
       description:
         "Software Requirements Specification document prepared using IEEE standards.",
-      github: "https://github.com/yourusername/music-srs",
+      github: "https://github.com/sakulavishmini/Music-Entertainment-SRS",
       live: "",
     },
     {
       title: "React Portfolio",
       description:
         "Personal portfolio website built using React with glassmorphism UI and animations.",
-      github: "https://github.com/yourusername/react-portfolio",
-      live: "https://your-portfolio-link.netlify.app",
+      github: "https://github.com/sakulavishmini/Portfolio",
+      live: "https://sakulajayarathne.vercel.app/",
+    },
+    {
+      title: "Library Master",
+      description:
+        "The Library Management System is a C# desktop application designed to efficiently manage library operations.",
+      github: "https://github.com/sakulavishmini/Library-Master",
+      live: "",
+    },
+    {
+      title: "GN Quick Check",
+      description:
+        "A Mindful Digital Platform for Checking Grama Niladhari Availability and Required Documentation",
+      github: "https://github.com/sakulavishmini/GN-QuickCheck/tree/main",
+      live: "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C/EEI4361---GN_Quickcheck--Phone-?node-id=2-7&t=lqJ9iNeOyIXFHZFW-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
+      /*live_: "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e/EEI4361---GN_Quickcheck--Web-?node-id=8-4&p=f&t=kaHrMCk7rmkLLLlS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",*/
     },
   ];
 

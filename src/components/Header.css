@@ -37,6 +37,7 @@ body {
   font-size: 26px;
   font-weight: 700;
   color: var(--accent-color);
+  color: rgb(61, 187, 196);
   text-decoration: none;
 }
 
@@ -105,11 +106,13 @@ body {
   align-items: center;
   padding: 120px 10% 60px;
 }
+
 .hero-container {
   display: flex;
   align-items: center;
   gap: 60px;
 }
+
 .intro .greeting { font-size: 26px; }
 .intro .name { font-size: 56px; font-weight: 700; margin: 10px 0; }
 .intro .title { font-size: 24px; margin-bottom: 25px; }
@@ -119,10 +122,12 @@ body {
   border-radius: 30px;
   background: var(--accent-color);
   color: var(--bg-color);
+  color: #081b29;
   font-weight: 600;
   text-decoration: none;
   transition: 0.3s;
 }
+
 .cv-btn:hover {
   background: transparent;
   color: var(--accent-color);
@@ -222,4 +227,20 @@ body {
 @keyframes linkFade {
   from { opacity: 0; transform: translateX(30px); }
   to { opacity: 1; transform: translateX(0); }
+}
+
+.title {
+  font-size: 1.4rem;
+  margin-top: 10px;
+  color: rgb(149, 207, 211);
+  min-height: 32px;
+}
+
+.typed-text {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.cv-btn{
+  background-color: rgb(64, 173, 180);
 }
