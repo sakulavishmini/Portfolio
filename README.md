@@ -13,12 +13,6 @@ This project is **ongoing**, and I continuously update it with new projects, fea
 
 ---
 
-## Screenshot
-![Portfolio Screenshot](src/assets/screenshot.png)  
-*(Replace with actual path to your screenshot image in the repo)*
-
----
-
 ## Features
 - **Home, About, Projects, and Contact sections**  
 - **Smooth scrolling** navigation with active link highlighting  
