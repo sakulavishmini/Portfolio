@@ -40,8 +40,16 @@ const Projects = () => {
       description:
         "A Mindful Digital Platform for Checking Grama Niladhari Availability and Required Documentation",
       github: "https://github.com/sakulavishmini/GN-QuickCheck/tree/main",
-      live: "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C/EEI4361---GN_Quickcheck--Phone-?node-id=2-7&t=lqJ9iNeOyIXFHZFW-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
-      /*live_: "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e/EEI4361---GN_Quickcheck--Web-?node-id=8-4&p=f&t=kaHrMCk7rmkLLLlS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",*/
+      liveDemos: [
+        {
+          label: "Mobile design link",
+          url: "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C/EEI4361---GN_Quickcheck--Phone-?node-id=2-7&t=lqJ9iNeOyIXFHZFW-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
+        },
+        {
+          label: "Web design link",
+          url: "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e/EEI4361---GN_Quickcheck--Web-?node-id=8-4&p=f&t=kaHrMCk7rmkLLLlS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
+        },
+      ]
     },
   ];
 
