@@ -1,6 +1,10 @@
 import React from "react";
 import "./Skills.css";
-import {FaHtml5, FaCss3Alt, FaJs, FaReact, FaGithub,} from "react-icons/fa";
+import { FaHtml5, FaCss3Alt, FaJs, FaReact, FaGithub, FaJava, FaPython, FaPhp } from "react-icons/fa";
+import {SiC, SiMysql} from "react-icons/si";
+import { VscVscode } from "react-icons/vsc";
+import { DiVisualstudio } from "react-icons/di";
+import { TbBrandCSharp } from "react-icons/tb";
 
 const Skills = () => {
   const skillGroups = [
@@ -17,18 +21,26 @@ const Skills = () => {
       title: "Tools",
       skills: [
         { name: "GitHub", icon: <FaGithub />, level: 80 },
-        { name: "VS Code", icon: <FaGithub />, level: 80 },
+        { name: "VS Code", icon: < VscVscode />, level: 80 },
+        { name: "Visual Studio", icon: < DiVisualstudio />, level: 70 },
       ],
     },
 
     {
       title: "Programming Languages",
       skills: [
-        { name: "Java", icon: <FaGithub />, level: 50 },
-        { name: "Python", icon: <FaGithub />, level: 50 },
-        { name: "C", icon: <FaGithub />, level: 60 },
-        { name: "C#", icon: <FaGithub />, level: 60 },
-        { name: "PHP", icon: <FaGithub />, level: 50 },
+        { name: "Java", icon: <FaJava />, level: 50 },
+        { name: "Python", icon: <FaPython />, level: 50 },
+        { name: "C", icon: <SiC  />, level: 60 },
+        { name: "C#", icon: <TbBrandCSharp  />, level: 60 },
+        { name: "PHP", icon: <FaPhp />, level: 50 },
+      ],
+    },
+
+    {
+      title: "Database",
+      skills: [
+        { name: "MySQL", icon: <SiMysql  />, level: 70 },
       ],
     },
   ];

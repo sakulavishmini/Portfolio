@@ -49,7 +49,7 @@ const Projects = () => {
           label: "Web design link",
           url: "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e/EEI4361---GN_Quickcheck--Web-?node-id=8-4&p=f&t=kaHrMCk7rmkLLLlS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
         },
-      ]
+      ],
     },
   ];
 
@@ -68,15 +68,27 @@ const Projects = () => {
             <p>{project.description}</p>
 
             <div className="project-links">
-              <a href={project.github} target="_blank" rel="noreferrer">
-                <FaGithub /> GitHub
-              </a>
+              {/* GitHub Link */}
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noreferrer">
+                  <FaGithub /> GitHub
+                </a>
+              )}
 
+              {/* Single Live Link */}
               {project.live && (
                 <a href={project.live} target="_blank" rel="noreferrer">
                   <FaExternalLinkAlt /> Live
                 </a>
               )}
+
+              {/* Multiple Live Demo Links */}
+              {project.liveDemos &&
+                project.liveDemos.map((demo, i) => (
+                  <a key={i} href={demo.url} target="_blank" rel="noreferrer">
+                    <FaExternalLinkAlt /> {demo.label}
+                  </a>
+                ))}
             </div>
           </div>
         ))}
