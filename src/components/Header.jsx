@@ -80,6 +80,8 @@ const Header = () => {
       <a href="#about" className={activeLink === "about" ? "active" : ""} onClick={() => handleLinkClick("about")}>About</a>
       <a href="#skills" className={activeLink === "skills" ? "active" : ""} onClick={() => handleLinkClick("skills")}>Skills</a>
       <a href="#projects" className={activeLink === "projects" ? "active" : ""} onClick={() => handleLinkClick("projects")}>Projects</a>
+      <a href="#education" className={activeLink === "education" ? "active" : ""} onClick={() => handleLinkClick("education")}>Education</a>
+      <a href="#experience" className={activeLink === "experience" ? "active" : ""} onClick={() => handleLinkClick("experience")}>Experience</a>
       <a href="#contact" className={activeLink === "contact" ? "active" : ""} onClick={() => handleLinkClick("contact")}>Contact</a>
     </div>
 
