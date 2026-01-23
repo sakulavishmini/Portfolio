@@ -13,10 +13,10 @@ const Experience = () => {
           <span className="experience-duration">2023 – Present</span>
 
           <ul>
-            <li>Handled school IT systems and routine administrative tasks</li>
-            <li>Taught basic IT and computer skills to students</li>
-            <li>Maintained digital records and documentation</li>
-            <li>Provided technical support and troubleshooting</li>
+            <li>Assisted in teaching ICT (Grades 6–11) and English to primary students in accordance with the school curriculum.</li>
+            <li>Supported students with physical and/or mental challenges through adaptive and inclusive teaching methods.</li>
+            <li>Assisted the School Principal with administrative tasks, including preparation of official documents.</li>
+            <li>Provided IT support and technical assistance to ensure smooth school operations</li>
           </ul>
         </div>
       </div>
