@@ -16,6 +16,7 @@
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 30px;
+  align-items: stretch;
 }
 
 /* Glass project card */
@@ -23,7 +24,9 @@
   background: rgba(255, 255, 255, 0.08);
   backdrop-filter: blur(12px);
   border-radius: 20px;
-  padding: 30px;
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
   transition: transform 0.3s ease, background 0.3s ease;
 }
 
@@ -41,13 +44,15 @@
   font-size: 0.95rem;
   line-height: 1.6;
   color: #cbd5f5;
+  flex-grow: 1;
 }
 
 /* Links */
 .project-links {
   margin-top: 20px;
   display: flex;
-  gap: 20px;
+  flex-wrap: wrap;
+  gap: 15px;
 }
 
 .project-links a {
@@ -76,3 +81,26 @@
 .project-card:hover .project-image {
   transform: scale(1.05);
 }
+
+@media (max-width: 768px) {
+  .projects {
+    padding: 70px 15px;
+  }
+
+  .project-card {
+    padding: 20px;
+  }
+
+  .project-image {
+    height: 160px; /* slightly smaller for mobile */
+  }
+
+  .project-links {
+    gap: 12px;
+  }
+
+  .project-links a {
+    font-size: 0.85rem;
+  }
+}
+
