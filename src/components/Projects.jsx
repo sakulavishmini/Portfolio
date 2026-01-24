@@ -5,15 +5,26 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const Projects = () => {
   const { ref, visible } = useScrollReveal();
-
-  const [activeIndex, setActiveIndex] = useState(null);
-  const [closing, setClosing] = useState(false);
-
-  const touchStartX = useRef(0);
+  const [zoomImage, setZoomImage] = useState(null);
+  const [zoomTitle, setZoomTitle] = useState("");
   const touchStartY = useRef(0);
-  const lastDistance = useRef(null);
-  const scale = useRef(1);
-  const imgRef = useRef(null);
+
+  /* ESC key close */
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        setZoomImage(null);
+      }
+    };
+
+    if (zoomImage) {
+      window.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [zoomImage]);
 
   const projects = [
     {
@@ -41,59 +52,22 @@ const Projects = () => {
     {
       title: "Library Master",
       description:
-        "C# desktop application for managing library operations.",
+        "The Library Management System is a C# desktop application designed to efficiently manage library operations.",
       github: "https://github.com/sakulavishmini/Library-Master",
       image: "/library_master.png",
     },
     {
       title: "GN Quick Check",
       description:
-        "Digital platform for checking Grama Niladhari availability.",
-      github: "https://github.com/sakulavishmini/GN-QuickCheck",
+        "A Mindful Digital Platform for Checking Grama Niladhari Availability and Required Documentation",
+      github: "https://github.com/sakulavishmini/GN-QuickCheck/tree/main",
+      liveDemos: [
+        { label: "Mobile design", url: "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C" },
+        { label: "Web design", url: "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e" },
+      ],
       image: "/gn_quickcheck.png",
     },
   ];
-
-  const closeModal = () => {
-    setClosing(true);
-    setTimeout(() => {
-      setActiveIndex(null);
-      setClosing(false);
-      scale.current = 1;
-    }, 250);
-  };
-
-  /* ESC + Arrow Keys */
-  useEffect(() => {
-    const handler = (e) => {
-      if (activeIndex === null) return;
-
-      if (e.key === "Escape") closeModal();
-      if (e.key === "ArrowRight")
-        setActiveIndex((i) => (i + 1) % projects.length);
-      if (e.key === "ArrowLeft")
-        setActiveIndex((i) => (i - 1 + projects.length) % projects.length);
-    };
-
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, [activeIndex]);
-
-  /* Pinch to zoom */
-  const handleTouchMove = (e) => {
-    if (e.touches.length === 2) {
-      const dx = e.touches[0].clientX - e.touches[1].clientX;
-      const dy = e.touches[0].clientY - e.touches[1].clientY;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-
-      if (lastDistance.current) {
-        scale.current += (distance - lastDistance.current) * 0.005;
-        scale.current = Math.min(Math.max(scale.current, 1), 3);
-        imgRef.current.style.transform = `scale(${scale.current})`;
-      }
-      lastDistance.current = distance;
-    }
-  };
 
   return (
     <section
@@ -104,59 +78,72 @@ const Projects = () => {
       <h2 className="section-title">Projects</h2>
 
       <div className="projects-grid">
-        {projects.map((p, i) => (
-          <div className="project-card" key={i}>
-            <img
-              src={p.image}
-              alt={p.title}
-              className="project-image"
-              onClick={() => setActiveIndex(i)}
-            />
-            <h3>{p.title}</h3>
-            <p>{p.description}</p>
+        {projects.map((project, index) => (
+          <div className="project-card" key={index}>
+            {project.image && (
+              <img
+                src={project.image}
+                alt={project.title}
+                className="project-image"
+                onClick={() => {
+                  setZoomImage(project.image);
+                  setZoomTitle(project.title);
+                }}
+              />
+            )}
+
+            <h3>{project.title}</h3>
+            <p>{project.description}</p>
+
+            <div className="project-links">
+              {project.github && (
+                <a href={project.github} target="_blank" rel="noreferrer">
+                  <FaGithub /> GitHub
+                </a>
+              )}
+
+              {project.live && (
+                <a href={project.live} target="_blank" rel="noreferrer">
+                  <FaExternalLinkAlt /> Live
+                </a>
+              )}
+
+              {project.liveDemos &&
+                project.liveDemos.map((demo, i) => (
+                  <a key={i} href={demo.url} target="_blank" rel="noreferrer">
+                    <FaExternalLinkAlt /> {demo.label}
+                  </a>
+                ))}
+            </div>
           </div>
         ))}
       </div>
 
-      {/* MODAL */}
-      {activeIndex !== null && (
+      {/* ZOOM MODAL */}
+      {zoomImage && (
         <div
-          className={`image-modal ${closing ? "closing" : ""}`}
-          onClick={closeModal}
-          onTouchStart={(e) => {
-            touchStartX.current = e.touches[0].clientX;
-            touchStartY.current = e.touches[0].clientY;
-            lastDistance.current = null;
-          }}
-          onTouchMove={handleTouchMove}
+          className="image-modal"
+          onClick={() => setZoomImage(null)}
+          onTouchStart={(e) => (touchStartY.current = e.touches[0].clientY)}
           onTouchEnd={(e) => {
-            const dx = e.changedTouches[0].clientX - touchStartX.current;
-            const dy = e.changedTouches[0].clientY - touchStartY.current;
-
-            if (Math.abs(dx) > 60) {
-              setActiveIndex((i) =>
-                dx < 0
-                  ? (i + 1) % projects.length
-                  : (i - 1 + projects.length) % projects.length
-              );
+            const touchEndY = e.changedTouches[0].clientY;
+            if (touchEndY - touchStartY.current > 80) {
+              setZoomImage(null); // swipe down close
             }
-
-            if (dy > 80) closeModal();
           }}
         >
           <div className="zoom-content" onClick={(e) => e.stopPropagation()}>
-            <span className="close-btn" onClick={closeModal}>
+            <img src={zoomImage} alt={zoomTitle} />
+            <p className="image-caption">{zoomTitle}</p>
+            <span
+              className="close-btn"
+              onClick={(e) => {
+                e.stopPropagation();
+                setZoomImage(null);
+              }}
+            >
               &times;
             </span>
-
-            <img
-              ref={imgRef}
-              src={projects[activeIndex].image}
-              alt={projects[activeIndex].title}
-            />
-            <p className="image-caption">
-              {projects[activeIndex].title}
-            </p>
           </div>
         </div>
       )}
