@@ -123,15 +123,6 @@
   animation: zoomIn 0.3s ease;
 }
 
-.close-btn {
-  position: absolute;
-  top: 20px;
-  right: 30px;
-  font-size: 40px;
-  color: white;
-  cursor: pointer;
-}
-
 /* Animation */
 @keyframes zoomIn {
   from {
@@ -173,6 +164,7 @@
   font-size: 36px;
   color: white;
   cursor: pointer;
+  z-index: 10;
 }
 
 .image-modal.closing {

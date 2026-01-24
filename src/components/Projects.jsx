@@ -5,26 +5,13 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const Projects = () => {
   const { ref, visible } = useScrollReveal();
-  const [zoomImage, setZoomImage] = useState(null);
-  const [zoomTitle, setZoomTitle] = useState("");
+
+  // store the index of the active project
+  const [activeIndex, setActiveIndex] = useState(null);
+  const [closing, setClosing] = useState(false);
+
+  const touchStartX = useRef(0);
   const touchStartY = useRef(0);
-
-  /* ESC key close */
-  useEffect(() => {
-    const handleKeyDown = (e) => {
-      if (e.key === "Escape") {
-        setZoomImage(null);
-      }
-    };
-
-    if (zoomImage) {
-      window.addEventListener("keydown", handleKeyDown);
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [zoomImage]);
 
   const projects = [
     {
@@ -69,6 +56,48 @@ const Projects = () => {
     },
   ];
 
+  const closeModal = () => {
+    setClosing(true);
+    setTimeout(() => {
+      setActiveIndex(null);
+      setClosing(false);
+    }, 250);
+  };
+
+  // ESC + Arrow navigation
+  useEffect(() => {
+    const handleKey = (e) => {
+      if (activeIndex === null) return;
+
+      if (e.key === "Escape") closeModal();
+      if (e.key === "ArrowRight")
+        setActiveIndex((i) => (i + 1) % projects.length);
+      if (e.key === "ArrowLeft")
+        setActiveIndex((i) => (i - 1 + projects.length) % projects.length);
+    };
+
+    window.addEventListener("keydown", handleKey);
+    return () => window.removeEventListener("keydown", handleKey);
+  }, [activeIndex, projects.length]);
+
+  // Handle horizontal swipe
+  const handleTouchEnd = (e) => {
+    if (!activeIndex && activeIndex !== 0) return;
+
+    const dx = e.changedTouches[0].clientX - touchStartX.current;
+    const dy = e.changedTouches[0].clientY - touchStartY.current;
+
+    // horizontal swipe left/right
+    if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
+      if (dx < 0) setActiveIndex((i) => (i + 1) % projects.length); // swipe left → next
+      else setActiveIndex((i) => (i - 1 + projects.length) % projects.length); // swipe right → prev
+      return;
+    }
+
+    // vertical swipe down → close
+    if (dy > 80) closeModal();
+  };
+
   return (
     <section
       id="projects"
@@ -85,10 +114,7 @@ const Projects = () => {
                 src={project.image}
                 alt={project.title}
                 className="project-image"
-                onClick={() => {
-                  setZoomImage(project.image);
-                  setZoomTitle(project.title);
-                }}
+                onClick={() => setActiveIndex(index)}
               />
             )}
 
@@ -101,13 +127,11 @@ const Projects = () => {
                   <FaGithub /> GitHub
                 </a>
               )}
-
               {project.live && (
                 <a href={project.live} target="_blank" rel="noreferrer">
                   <FaExternalLinkAlt /> Live
                 </a>
               )}
-
               {project.liveDemos &&
                 project.liveDemos.map((demo, i) => (
                   <a key={i} href={demo.url} target="_blank" rel="noreferrer">
@@ -119,31 +143,25 @@ const Projects = () => {
         ))}
       </div>
 
-      {/* ZOOM MODAL */}
-      {zoomImage && (
+      {activeIndex !== null && (
         <div
-          className="image-modal"
-          onClick={() => setZoomImage(null)}
-          onTouchStart={(e) => (touchStartY.current = e.touches[0].clientY)}
-          onTouchEnd={(e) => {
-            const touchEndY = e.changedTouches[0].clientY;
-            if (touchEndY - touchStartY.current > 80) {
-              setZoomImage(null); // swipe down close
-            }
+          className={`image-modal ${closing ? "closing" : ""}`}
+          onClick={closeModal}
+          onTouchStart={(e) => {
+            touchStartX.current = e.touches[0].clientX;
+            touchStartY.current = e.touches[0].clientY;
           }}
+          onTouchEnd={handleTouchEnd}
         >
           <div className="zoom-content" onClick={(e) => e.stopPropagation()}>
-            <img src={zoomImage} alt={zoomTitle} />
-            <p className="image-caption">{zoomTitle}</p>
-            <span
-              className="close-btn"
-              onClick={(e) => {
-                e.stopPropagation();
-                setZoomImage(null);
-              }}
-            >
+            <span className="close-btn" onClick={closeModal}>
               &times;
             </span>
+            <img
+              src={projects[activeIndex].image}
+              alt={projects[activeIndex].title}
+            />
+            <p className="image-caption">{projects[activeIndex].title}</p>
           </div>
         </div>
       )}
