@@ -100,7 +100,7 @@ const Header = () => {
         <div className="hero-container">
           <div className="intro">
             <p className="greeting">Hello! I'm</p>
-            <h1 className="name">Sakula Jayarathne</h1>
+            <h1 className="name">Sakula Vishmini</h1>
             <p className="title">
               <span ref={typedRef} className="typed-text"></span>
             </p>
