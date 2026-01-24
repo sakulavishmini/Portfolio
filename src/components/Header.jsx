@@ -117,7 +117,7 @@ const Header = () => {
 
           <div className="profile-image" data-aos="fade-left">
             <div className="profile-circle">
-              <img src={profilePic} alt="Sakula Jayarathne" />
+              <img src={profilePic} alt="Sakula Vishmini" />
             </div>
           </div>
         </div>
