@@ -6,56 +6,78 @@ import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 const Projects = () => {
   const { ref, visible } = useScrollReveal();
 
-  // store the index of the active project
-  const [activeIndex, setActiveIndex] = useState(null);
+  // State
+  const [activeIndex, setActiveIndex] = useState(null); // modal
   const [closing, setClosing] = useState(false);
+  const [activeCategory, setActiveCategory] = useState("All");
 
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
 
+  // Projects data
   const projects = [
+    {
+      title: "React Portfolio",
+      description:
+        "Personal portfolio website built using React with glassmorphism UI and animations.",
+      tools: ["React", "CSS", "JavaScript"],
+      github: "https://github.com/sakulavishmini/Portfolio",
+      liveDemos: ["https://sakulajayarathne.vercel.app/"],
+      images: ["/portfolio.png"],
+      category: "Frontend",
+    },
+    {
+      title: "Library Master",
+      description:
+        "C# desktop application for managing library operations efficiently.",
+      tools: ["C#", ".NET", "SQL"],
+      github: "https://github.com/sakulavishmini/Library-Master",
+      liveDemos: [],
+      images: ["/library_master.png"],
+      category: "Backend",
+    },
+    {
+      title: "GN Quick Check",
+      description:
+        "Digital platform for checking Grama Niladhari availability and required documentation.",
+      tools: ["Figma", "UX/UI Design"],
+      github: "https://github.com/sakulavishmini/GN-QuickCheck",
+      liveDemos: [
+        "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C",
+        "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e",
+      ],
+      images: ["/gn_quickcheck.png"],
+      category: "UX/UI Design",
+    },
     {
       title: "Hospital Database System",
       description:
         "A relational database system designed using ER diagrams and SQL queries for hospital management.",
+      tools: ["MySQL", "SQL", "ERD"],
       github: "https://github.com/sakulavishmini/Hospital-Database",
-      image: "/hospital_database.png",
+      liveDemos: [],
+      images: ["/hospital_database.png"],
+      category: "Database",
     },
     {
       title: "Music & Entertainment SRS",
       description:
         "Software Requirements Specification document prepared using IEEE standards.",
+      tools: [],
       github: "https://github.com/sakulavishmini/Music-Entertainment-SRS",
-      image: "/music_srs.png",
-    },
-    {
-      title: "React Portfolio",
-      description:
-        "Personal portfolio website built using React with glassmorphism UI and animations.",
-      github: "https://github.com/sakulavishmini/Portfolio",
-      live: "https://sakulajayarathne.vercel.app/",
-      image: "/portfolio.png",
-    },
-    {
-      title: "Library Master",
-      description:
-        "The Library Management System is a C# desktop application designed to efficiently manage library operations.",
-      github: "https://github.com/sakulavishmini/Library-Master",
-      image: "/library_master.png",
-    },
-    {
-      title: "GN Quick Check",
-      description:
-        "A Mindful Digital Platform for Checking Grama Niladhari Availability and Required Documentation",
-      github: "https://github.com/sakulavishmini/GN-QuickCheck/tree/main",
-      liveDemos: [
-        { label: "Mobile design", url: "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C" },
-        { label: "Web design", url: "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e" },
-      ],
-      image: "/gn_quickcheck.png",
+      liveDemos: [],
+      images: ["/music_srs.png"],
+      category: "Others",
     },
   ];
 
+  // Filter projects by category
+  const filteredProjects =
+    activeCategory === "All"
+      ? projects
+      : projects.filter((p) => p.category === activeCategory);
+
+  // Modal close
   const closeModal = () => {
     setClosing(true);
     setTimeout(() => {
@@ -64,62 +86,68 @@ const Projects = () => {
     }, 250);
   };
 
-  // ESC + Arrow navigation
+  // Keyboard navigation
   useEffect(() => {
     const handleKey = (e) => {
       if (activeIndex === null) return;
-
       if (e.key === "Escape") closeModal();
       if (e.key === "ArrowRight")
-        setActiveIndex((i) => (i + 1) % projects.length);
+        setActiveIndex((i) => (i + 1) % filteredProjects.length);
       if (e.key === "ArrowLeft")
-        setActiveIndex((i) => (i - 1 + projects.length) % projects.length);
+        setActiveIndex((i) => (i - 1 + filteredProjects.length) % filteredProjects.length);
     };
 
     window.addEventListener("keydown", handleKey);
     return () => window.removeEventListener("keydown", handleKey);
-  }, [activeIndex, projects.length]);
+  }, [activeIndex, filteredProjects.length]);
 
-  // Handle horizontal swipe
+  // Swipe handling
   const handleTouchEnd = (e) => {
-    if (!activeIndex && activeIndex !== 0) return;
-
+    if (activeIndex === null) return;
     const dx = e.changedTouches[0].clientX - touchStartX.current;
     const dy = e.changedTouches[0].clientY - touchStartY.current;
 
-    // horizontal swipe left/right
     if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) {
-      if (dx < 0) setActiveIndex((i) => (i + 1) % projects.length); // swipe left → next
-      else setActiveIndex((i) => (i - 1 + projects.length) % projects.length); // swipe right → prev
+      if (dx < 0) setActiveIndex((i) => (i + 1) % filteredProjects.length);
+      else setActiveIndex((i) => (i - 1 + filteredProjects.length) % filteredProjects.length);
       return;
     }
 
-    // vertical swipe down → close
-    if (dy > 80) closeModal();
+    if (dy > 80) closeModal(); // swipe down to close
   };
 
+  const categories = ["All", "Frontend", "Backend", "Fullstack", "Database", "UX/UI Design", "Others"];
+
   return (
-    <section
-      id="projects"
-      ref={ref}
-      className={`projects ${visible ? "show" : ""}`}
-    >
+    <section id="projects" ref={ref} className={`projects ${visible ? "show" : ""}`}>
       <h2 className="section-title">Projects</h2>
 
-      <div className="projects-grid">
-        {projects.map((project, index) => (
-          <div className="project-card" key={index}>
-            {project.image && (
-              <img
-                src={project.image}
-                alt={project.title}
-                className="project-image"
-                onClick={() => setActiveIndex(index)}
-              />
-            )}
+      {/* Category Buttons */}
+      <div className="categories">
+        {categories.map((cat) => (
+          <button
+            key={cat}
+            className={activeCategory === cat ? "active" : ""}
+            onClick={() => setActiveCategory(cat)}
+          >
+            {cat}
+          </button>
+        ))}
+      </div>
 
+      {/* Projects Grid */}
+      <div className="projects-grid">
+        {filteredProjects.map((project, index) => (
+          <div className="project-card" key={index}>
+            <img
+              src={project.images[0]}
+              alt={project.title}
+              className="project-image"
+              onClick={() => setActiveIndex(index)}
+            />
             <h3>{project.title}</h3>
             <p>{project.description}</p>
+            <p className="tools-used">Tools: {project.tools.join(", ")}</p>
 
             <div className="project-links">
               {project.github && (
@@ -127,15 +155,10 @@ const Projects = () => {
                   <FaGithub /> GitHub
                 </a>
               )}
-              {project.live && (
-                <a href={project.live} target="_blank" rel="noreferrer">
-                  <FaExternalLinkAlt /> Live
-                </a>
-              )}
               {project.liveDemos &&
                 project.liveDemos.map((demo, i) => (
-                  <a key={i} href={demo.url} target="_blank" rel="noreferrer">
-                    <FaExternalLinkAlt /> {demo.label}
+                  <a key={i} href={demo} target="_blank" rel="noreferrer">
+                    <FaExternalLinkAlt /> Live Demo
                   </a>
                 ))}
             </div>
@@ -143,6 +166,7 @@ const Projects = () => {
         ))}
       </div>
 
+      {/* Zoom Modal */}
       {activeIndex !== null && (
         <div
           className={`image-modal ${closing ? "closing" : ""}`}
@@ -158,10 +182,10 @@ const Projects = () => {
               &times;
             </span>
             <img
-              src={projects[activeIndex].image}
-              alt={projects[activeIndex].title}
+              src={filteredProjects[activeIndex].images[0]}
+              alt={filteredProjects[activeIndex].title}
             />
-            <p className="image-caption">{projects[activeIndex].title}</p>
+            <p className="image-caption">{filteredProjects[activeIndex].title}</p>
           </div>
         </div>
       )}
