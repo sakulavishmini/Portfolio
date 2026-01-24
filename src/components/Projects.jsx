@@ -1,10 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import "./Projects.css";
 import useScrollReveal from "../hooks/useScrollReveal.jsx";
 import { FaGithub, FaExternalLinkAlt } from "react-icons/fa";
 
 const Projects = () => {
   const { ref, visible } = useScrollReveal();
+  const [zoomImage, setZoomImage] = useState(null);
 
   const projects = [
     {
@@ -12,7 +13,6 @@ const Projects = () => {
       description:
         "A relational database system designed using ER diagrams and SQL queries for hospital management.",
       github: "https://github.com/sakulavishmini/Hospital-Database",
-      live: "",
       image: "/hospital_database.png",
     },
     {
@@ -20,7 +20,6 @@ const Projects = () => {
       description:
         "Software Requirements Specification document prepared using IEEE standards.",
       github: "https://github.com/sakulavishmini/Music-Entertainment-SRS",
-      live: "",
       image: "/music_srs.png",
     },
     {
@@ -36,7 +35,6 @@ const Projects = () => {
       description:
         "The Library Management System is a C# desktop application designed to efficiently manage library operations.",
       github: "https://github.com/sakulavishmini/Library-Master",
-      live: "",
       image: "/library_master.png",
     },
     {
@@ -46,12 +44,12 @@ const Projects = () => {
       github: "https://github.com/sakulavishmini/GN-QuickCheck/tree/main",
       liveDemos: [
         {
-          label: "Mobile design link",
-          url: "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C/EEI4361---GN_Quickcheck--Phone-?node-id=2-7&t=lqJ9iNeOyIXFHZFW-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
+          label: "Mobile design",
+          url: "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C",
         },
         {
-          label: "Web design link",
-          url: "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e/EEI4361---GN_Quickcheck--Web-?node-id=8-4&p=f&t=kaHrMCk7rmkLLLlS-1&scaling=scale-down&content-scaling=fixed&page-id=0%3A1",
+          label: "Web design",
+          url: "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e",
         },
       ],
       image: "/gn_quickcheck.png",
@@ -69,22 +67,19 @@ const Projects = () => {
       <div className="projects-grid">
         {projects.map((project, index) => (
           <div className="project-card" key={index}>
-            {/* Project Image */}
+            {/* Image */}
             {project.image && (
               <img
                 src={project.image}
                 alt={project.title}
                 className="project-image"
+                onClick={() => setZoomImage(project.image)}
               />
             )}
 
-            {/* Project Title */}
             <h3>{project.title}</h3>
-
-            {/* Project Description */}
             <p>{project.description}</p>
 
-            {/* Project Links */}
             <div className="project-links">
               {project.github && (
                 <a href={project.github} target="_blank" rel="noreferrer">
@@ -108,6 +103,14 @@ const Projects = () => {
           </div>
         ))}
       </div>
+
+      {/* IMAGE ZOOM MODAL */}
+      {zoomImage && (
+        <div className="image-modal" onClick={() => setZoomImage(null)}>
+          <img src={zoomImage} alt="Zoomed project" />
+          <span className="close-btn">&times;</span>
+        </div>
+      )}
     </section>
   );
 };
