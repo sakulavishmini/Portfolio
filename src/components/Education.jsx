@@ -1,71 +1,82 @@
 import React from "react";
 import "./Education.css";
+import { FaGraduationCap } from "react-icons/fa";
 
 const Education = () => {
+  const educationData = [
+    {
+      title: "Bachelor of Software Engineering (Honours)",
+      institute: "Open University of Sri Lanka",
+      duration: "2023 – Present",
+      details: [
+        "Web Technologies (React, PHP, CodeIgniter)",
+        "Data Structures & Algorithms",
+        "Database Systems",
+        "Software Engineering & SRS Documentation",
+      ],
+    },
+    {
+      title: "Diploma in Information Technology",
+      institute: "Esoft Metro Campus",
+      duration: "2023 – 2024",
+      details: [
+        "Microsoft Word",
+        "Microsoft Excel",
+        "Microsoft PowerPoint",
+        "HTML & Database Basics",
+        "C# Fundamentals",
+      ],
+    },
+    {
+      title: "Diploma in English",
+      institute: "Esoft Metro Campus",
+      duration: "2023 – 2024",
+      details: [
+        "Improved communication, reading, writing, and presentation skills",
+      ],
+    },
+    {
+      title: "Diploma in Psychology and Counselling",
+      institute: "SITC Campus",
+      duration: "2023",
+      details: [
+        "Basic psychology concepts, human behavior, and counselling techniques",
+      ],
+    },
+    {
+      title: "G.C.E. Advanced Level (Physical Science)",
+      institute: "Princess of Wales’ College",
+      duration: "2022",
+      details: [
+        "Completed Advanced Level studies in the Physical Science stream",
+      ],
+    },
+  ];
+
   return (
     <section className="education" id="education">
       <h2 className="section-title">Education</h2>
 
-      <div className="education-container">
-        <div className="education-card">
-          <h3>Bachelor of Software Engineering (Honours)</h3>
-          <p className="institute">
-            Open University of Sri Lanka
-          </p>
-          <span className="duration">2023 – Present</span>
+      <div className="timeline">
+        {educationData.map((edu, index) => (
+          <div className="timeline-item" key={index}>
+            <div className="timeline-icon">
+              <FaGraduationCap />
+            </div>
 
-          <ul>
-            <li>Web Technologies (React, PHP, CodeIgniter)</li>
-            <li>Data Structures & Algorithms</li>
-            <li>Database Systems</li>
-            <li>Software Engineering & SRS Documentation</li>
-          </ul>
-        </div>
+            <div className="timeline-content">
+              <h3>{edu.title}</h3>
+              <span className="timeline-date">{edu.duration}</span>
+              <p className="institute">{edu.institute}</p>
 
-        <div className="education-card">
-          <h3>Diploma in Information Technology</h3>
-          <p className="institute">
-            Esoft Metro Campus
-          </p>
-          <span className="duration">Completed (2023 - 2024) </span>
-
-          <ul>
-            <li>Microsoft Word</li>
-            <li>Microsoft Excel</li>
-            <li>Microsoft Powerpoint</li>
-            <li>Microsoft HTML</li>
-            <li>Microsoft Database</li>
-            <li>Microsoft C#</li>
-          </ul>
-        </div>
-
-        <div className="education-card">
-          <h3>Diploma in English </h3>
-          <p className="institute">
-            Esoft Metro Campus
-          </p>
-          <span className="duration">Completed (2023 - 2024) </span>
-          <p>Enhanced English language proficiency with a focus on communication, reading, writing, and presentation skills, supporting effective interaction in academic and professional environments.</p>
-        </div>
-
-        <div className="education-card">
-          <h3>Diploma in Psychology and Counselling</h3>
-          <p className="institute">
-            SITC Campus
-          </p>
-          <span className="duration">Completed (2023) </span>
-          <p>Studied basic psychological concepts, human behavior, and counselling techniques, developing empathy, communication skills, and the ability to work effectively with diverse individuals.</p>
-        </div>
-
-        <div className="education-card">
-          <h3>G.C.E. Advanced Level</h3>
-          <p className="institute">
-            Princess of Wales’ College
-          </p>
-          <span className="duration">Completed (2022)</span>
-          <p>Completed Advanced Level studies in the Physical Science stream, building a strong foundation in logical thinking, analytical skills, and problem-solving.</p>
-        </div>
-
+              <ul>
+                {edu.details.map((detail, i) => (
+                  <li key={i}>{detail}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))}
       </div>
     </section>
   );
