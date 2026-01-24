@@ -22,7 +22,8 @@ const Projects = () => {
         "Personal portfolio website built using React with glassmorphism UI and animations.",
       tools: ["React", "CSS", "JavaScript"],
       github: "https://github.com/sakulavishmini/Portfolio",
-      liveDemos: ["https://sakulajayarathne.vercel.app/"],
+      liveDemos: [
+        { label: "Portfolio", url:"https://sakulajayarathne.vercel.app/"}],
       images: ["/portfolio.png"],
       category: "Frontend",
     },
@@ -43,8 +44,8 @@ const Projects = () => {
       tools: ["Figma", "UX/UI Design"],
       github: "https://github.com/sakulavishmini/GN-QuickCheck",
       liveDemos: [
-        "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C",
-        "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e",
+        { label: "Mobile design", url: "https://www.figma.com/proto/UANxAXZjce7K53h5paMu2C" },
+        { label: "Web design", url: "https://www.figma.com/proto/0M1Cxo4gHu21dAd2I2ux6e" },
       ],
       images: ["/gn_quickcheck.png"],
       category: "UX/UI Design",
@@ -157,10 +158,10 @@ const Projects = () => {
               )}
               {project.liveDemos &&
                 project.liveDemos.map((demo, i) => (
-                  <a key={i} href={demo} target="_blank" rel="noreferrer">
-                    <FaExternalLinkAlt /> Live Demo
+                  <a key={i} href={demo.url} target="_blank" rel="noreferrer">
+                    <FaExternalLinkAlt /> {demo.label}
                   </a>
-                ))}
+              ))}
             </div>
           </div>
         ))}
