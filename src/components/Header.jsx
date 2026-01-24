@@ -72,7 +72,7 @@ const Header = () => {
   return (
     <header className="header">
       <nav className={`nav ${shrink ? "nav-shrink" : ""}`}>
-  <a href="#home" className={`logo ${activeLink === "home" ? "active" : ""}`}>Sakula Jayarathne</a>
+  <a href="#home" className={`logo ${activeLink === "home" ? "active" : ""}`}>Sakula Vishmini</a>
 
   <div className="nav-right">
     <div className={`nav-links ${menuOpen ? "open" : ""}`}>
